@@ -3,67 +3,80 @@
         {
             "name": "Arc Browser",
             "path": "/Applications/Arc.app",
-            "iconPath": "/Applications/Arc.app/Contents/Resources/AppIcon.icns"
+            "iconPath": "/Applications/Arc.app/Contents/Resources/AppIcon.icns",
+            "bundleId": "com.example.arc"
         },
         {
             "name": "Brave Browser",
             "path": "/Applications/Brave Browser.app",
-            "iconPath": "/Applications/Brave Browser.app/Contents/Resources/app.icns"
+            "iconPath": "/Applications/Brave Browser.app/Contents/Resources/app.icns",
+            "bundleId": "com.example.brave"
         },
         {
             "name": "Cisco Webex",
             "path": "/Applications/Webex.app",
-            "iconPath": "/Applications/Webex.app/Contents/Resources/app_publishing_logo.icns"
+            "iconPath": "/Applications/Webex.app/Contents/Resources/app_publishing_logo.icns",
+            "bundleId": "com.example.webex"
         },
         {
             "name": "DisplayLink Manager",
             "path": "/Applications/DisplayLink Manager.app",
-            "iconPath": "/Applications/DisplayLink Manager.app/Contents/Resources/Icon.icns"
+            "iconPath": "/Applications/DisplayLink Manager.app/Contents/Resources/Icon.icns",
+            "bundleId": "com.example.displaylink"
         },
         {
             "name": "Mozilla Firefox",
             "path": "/Applications/Firefox.app",
-            "iconPath": "/Applications/Firefox.app/Contents/Resources/firefox.icns"
+            "iconPath": "/Applications/Firefox.app/Contents/Resources/firefox.icns",
+            "bundleId": "com.example.firefox"
         },
         {
             "name": "Google Chrome",
             "path": "/Applications/Google Chrome.app",
-            "iconPath": "/Applications/Google Chrome.app/Contents/Resources/app.icns"
+            "iconPath": "/Applications/Google Chrome.app/Contents/Resources/app.icns",
+            "bundleId": "com.example.chrome"
         },
         {
             "name": "Kap",
             "path": "/Applications/Kap.app",
-            "iconPath": "/Applications/Kap.app/Contents/Resources/icon.icns"
+            "iconPath": "/Applications/Kap.app/Contents/Resources/icon.icns",
+            "bundleId": "com.example.kap"
         },
         {
             "name": "Microsoft Edge",
             "path": "/Applications/Microsoft Edge.app",
-            "iconPath": "/Applications/Microsoft Edge.app/Contents/Resources/AppIcon.icns"
+            "iconPath": "/Applications/Microsoft Edge.app/Contents/Resources/AppIcon.icns",
+            "bundleId": "com.example.edge"
         },
         {
             "name": "Microsoft Teams",
             "path": "/Applications/Microsoft Teams.app",
-            "iconPath": "/Applications/Microsoft Teams.app/Contents/Resources/icon+new.icns"
+            "iconPath": "/Applications/Microsoft Teams.app/Contents/Resources/icon+new.icns",
+            "bundleId": "com.example.teams"
         },
         {
             "name": "OBS Studio",
             "path": "/Applications/OBS.app",
-            "iconPath": "/Applications/OBS.app/Contents/Resources/AppIcon.icns"
+            "iconPath": "/Applications/OBS.app/Contents/Resources/AppIcon.icns",
+            "bundleId": "com.example.obs"
         },
         {
             "name": "Slack",
             "path": "/Applications/Slack.app",
-            "iconPath": "/Applications/Slack.app/Contents/Resources/slack-key.icns"
+            "iconPath": "/Applications/Slack.app/Contents/Resources/slack-key.icns",
+            "bundleId": "com.example.slack"
         },
         {
             "name": "Zoom",
             "path": "/Applications/zoom.us.app",
-            "iconPath": "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns"
+            "iconPath": "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns",
+            "bundleId": "com.example.zoom"
         },
         {
             "name": "Canary",
             "path": "/Applications/Canary.app",
-            "iconPath": "/Applications/Canary.app/Contents/Resources/CanaryLogo.icns"
+            "iconPath": "/Applications/Canary.app/Contents/Resources/CanaryLogo.icns",
+            "bundleId": "com.example.canary"
         }
     ]
 }
