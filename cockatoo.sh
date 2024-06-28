@@ -78,4 +78,4 @@ for shortcode in "${MissingPermissions[@]}"; do
 done
 
 # Remember to add back runAsUser Mike ;)
-/usr/local/bin/dialog --title "Screen Sharing Permissions" --message "These applications are currently missing screen sharing permissions, these are essential should you wish to share your screen in a meeting or for a recording." "${ArgsList[@]}" --icon "https://raw.githubusercontent.com/BiosPlus/Cockatoo/main/data/mysteryicon.png" --button1 "Grant Permissions" --button2 "Cancel"
+/usr/local/bin/dialog --title "Screen Sharing Permissions" --message "These applications are currently missing screen sharing permissions, these are essential should you wish to share your screen in a meeting or for a recording." "${ArgsList[@]}" --icon "https://raw.githubusercontent.com/BiosPlus/Cockatoo/main/data/mysteryicon.png" --button1text "Open Preferences" --button2text "Dismiss"
