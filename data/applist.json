@@ -1,0 +1,69 @@
+{
+    "applications": [
+        {
+            "name": "Arc Browser",
+            "path": "/Applications/Arc.app",
+            "iconPath": "/Applications/Arc.app/Contents/Resources/AppIcon.icns"
+        },
+        {
+            "name": "Brave Browser",
+            "path": "/Applications/Brave Browser.app",
+            "iconPath": "/Applications/Brave Browser.app/Contents/Resources/app.icns"
+        },
+        {
+            "name": "Cisco Webex",
+            "path": "/Applications/Webex.app",
+            "iconPath": "/Applications/Webex.app/Contents/Resources/app_publishing_logo.icns"
+        },
+        {
+            "name": "DisplayLink Manager",
+            "path": "/Applications/DisplayLink Manager.app",
+            "iconPath": "/Applications/DisplayLink Manager.app/Contents/Resources/Icon.icns"
+        },
+        {
+            "name": "Mozilla Firefox",
+            "path": "/Applications/Firefox.app",
+            "iconPath": "/Applications/Firefox.app/Contents/Resources/firefox.icns"
+        },
+        {
+            "name": "Google Chrome",
+            "path": "/Applications/Google Chrome.app",
+            "iconPath": "/Applications/Google Chrome.app/Contents/Resources/app.icns"
+        },
+        {
+            "name": "Kap",
+            "path": "/Applications/Kap.app",
+            "iconPath": "/Applications/Kap.app/Contents/Resources/icon.icns"
+        },
+        {
+            "name": "Microsoft Edge",
+            "path": "/Applications/Microsoft Edge.app",
+            "iconPath": "/Applications/Microsoft Edge.app/Contents/Resources/AppIcon.icns"
+        },
+        {
+            "name": "Microsoft Teams",
+            "path": "/Applications/Microsoft Teams.app",
+            "iconPath": "/Applications/Microsoft Teams.app/Contents/Resources/icon+new.icns"
+        },
+        {
+            "name": "OBS Studio",
+            "path": "/Applications/OBS.app",
+            "iconPath": "/Applications/OBS.app/Contents/Resources/AppIcon.icns"
+        },
+        {
+            "name": "Slack",
+            "path": "/Applications/Slack.app",
+            "iconPath": "/Applications/Slack.app/Contents/Resources/slack-key.icns"
+        },
+        {
+            "name": "Zoom",
+            "path": "/Applications/zoom.us.app",
+            "iconPath": "/Applications/zoom.us.app/Contents/Resources/ZPLogo.icns"
+        },
+        {
+            "name": "Canary",
+            "path": "/Applications/Canary.app",
+            "iconPath": "/Applications/Canary.app/Contents/Resources/CanaryLogo.icns"
+        }
+    ]
+}
