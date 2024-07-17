@@ -1,0 +1,16 @@
+name: Builder
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Install shc
+        run: brew install shc
+      - name: Check shc version
+        run: shc -v
