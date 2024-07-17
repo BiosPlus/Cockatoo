@@ -14,7 +14,9 @@ jobs:
     #   with:
     #     p12-file-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
     #     p12-password: ${{ secrets.P12_PASSWORD }}
-    
+    - name: Checkout
+      uses: actions/checkout@v2
+
     - name: Make builder and output dir
       run: |
         mkdir builder
@@ -29,6 +31,7 @@ jobs:
     
     - name: Build
       run: |
+        ls -lh
         shc -f cockatoo.sh -o builder/cockatoo
 
     
