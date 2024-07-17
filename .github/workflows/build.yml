@@ -33,5 +33,6 @@ jobs:
       run: |
         ls -lh
         shc -f cockatoo.sh -o builder/cockatoo
+        ls -lh builder
 
     
