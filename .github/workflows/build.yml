@@ -6,11 +6,29 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: macos-latest
-
+  builder:
+    runs-on: macOS-latest
     steps:
-      - name: Install shc
-        run: brew install shc
-      - name: Check shc version
-        run: shc -v
+    # - name: Set up MacOS Codesign
+    #   uses: apple-actions/import-codesign-certs@v1
+    #   with:
+    #     p12-file-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+    #     p12-password: ${{ secrets.P12_PASSWORD }}
+    
+    - name: Make builder and output dir
+      run: |
+        mkdir builder
+        mkdir output
+    
+    - name: Install dependencies 
+      run: |
+        brew install shc autoconf automake libtool
+        curl -sSfL https://raw.githubusercontent.com/anchore/quill/main/install.sh | sh -s -- -b /usr/local/bin
+  
+# TODO: Add JQ to binary
+    
+    - name: Build
+      run: |
+        shc -f cockatoo.sh -o builder/cockatoo
+
+    
