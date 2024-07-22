@@ -9,13 +9,21 @@ jobs:
   builder:
     runs-on: macOS-latest
     steps:
-    # - name: Set up MacOS Codesign
-    #   uses: apple-actions/import-codesign-certs@v1
-    #   with:
-    #     p12-file-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-    #     p12-password: ${{ secrets.P12_PASSWORD }}
+
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Import Codesign Certificates - Application
+      uses: apple-actions/import-codesign-certs@v3
+      with: 
+        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
+        p12-password: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
+
+    - name: Import Codesign Certificates - Application
+      uses: apple-actions/import-codesign-certs@v3
+      with: 
+        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_B64 }}
+        p12-password: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_DECRYPT }}
 
     - name: Make builder and output dir
       run: |
@@ -25,14 +33,21 @@ jobs:
     - name: Install dependencies 
       run: |
         brew install shc autoconf automake libtool
+    
+    - name: Install Quill
+      run: |
         curl -sSfL https://raw.githubusercontent.com/anchore/quill/main/install.sh | sh -s -- -b /usr/local/bin
   
-# TODO: Add JQ to binary
-    
     - name: Build
       run: |
         ls -lh
         shc -f cockatoo.sh -o builder/cockatoo
         ls -lh builder
 
-    
+    - name: Codesign package
+      run: |
+        quill sign builder/cockatoo
+
+    - name: Verify codesign
+      run: |
+        codesign -dvvv builder/cockatoo
