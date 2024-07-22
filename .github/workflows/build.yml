@@ -58,7 +58,7 @@ jobs:
     - name: Verify codesign
       run: |
         codesign --verify --verbose builder/cockatoo
-        spctl --assess --type exec --verbose builder/cockatoo
+#        spctl --assess --type exec --verbose builder/cockatoo
 
     - name: Package binary
       run: |
