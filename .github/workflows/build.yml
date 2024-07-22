@@ -13,11 +13,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Import Codesign Certificates - Application
-      uses: apple-actions/import-codesign-certs@v3
-      with: 
-        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
-        p12-password: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
+    # - name: Import Codesign Certificates - Application
+    #   uses: apple-actions/import-codesign-certs@v3
+    #   with: 
+    #     p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
+    #     p12-password: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
+
+
+    - name: Set Quill Signing Certs
+      run: |
+        export QUILL_SIGN_P12=${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
+        export QUILL_SIGN_PASSWORD=${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
 
     - name: Make builder and output dir
       run: |
