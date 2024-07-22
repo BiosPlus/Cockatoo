@@ -66,6 +66,11 @@ jobs:
     - name: Notarization
       run: |
         xcrun notarytool submit "builder/cockatoo.zip" --keychain-profile "Cockatoo" --wait
+
+    - name: Staple Notarization
+      run: |
         xcrun stapler staple "builder/cockatoo"
 
+    - name: Move to output dir
+      run: |
         mv "builder/cockatoo.zip" "output/cockatoo.zip"
