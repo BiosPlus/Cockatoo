@@ -46,7 +46,8 @@ jobs:
         ls -lh
         shc -f cockatoo.sh -o cockatoo
         shc -f cockatoo.sh -o cockatee
-        mv cockatoo builder/cockatoo
+        mv cockatee builder/
+        mv cockatoo builder/
         ls -lh builder
 
     - name: Codesign Binary
