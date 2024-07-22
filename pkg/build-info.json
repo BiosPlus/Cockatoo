@@ -3,7 +3,7 @@
     "suppress_bundle_relocation": true,
     "name": "Cockatoo-${version}.pkg",
     "distribution_style": true,
-    "install_location": "/usr/local/bin/",
+    "install_location": "/",
     "version": "0.1",
     "ownership": "recommended",
     "identifier": "gg.jonblack.Cockatoo",
