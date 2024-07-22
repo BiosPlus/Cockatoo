@@ -50,13 +50,13 @@ jobs:
         mv cockatoo builder/
         ls -lh builder
 
-    - name: Codesign Binary
-      run: |
-        codesign --deep --force --verify --verbose --sign "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" --timestamp -o runtime -i "gg.jonblack.cockatoo" builder/cockatoo
+    # - name: Codesign Binary
+    #   run: |
+    #     codesign --deep --force --verify --verbose --sign "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" --timestamp -o runtime -i "gg.jonblack.cockatoo" builder/cockatoo
 
-    - name: Verify codesign
-      run: |
-        codesign --verify --verbose builder/cockatoo
+    # - name: Verify codesign
+    #   run: |
+    #     codesign --verify --verbose builder/cockatoo
 
     # - name: Package binary
     #   run: |
