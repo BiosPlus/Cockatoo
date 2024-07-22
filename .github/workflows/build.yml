@@ -39,14 +39,12 @@ jobs:
     
     - name: Install dependencies 
       run: |
-        brew reinstall shc autoconf automake libtool --force
+        brew reinstall shc autoconf automake libtool
   
     - name: Build binary
       run: |
         ls -lh
         shc -f -r cockatoo.sh -o cockatoo
-        shc -f -r cockatoo.sh -o cockatee
-        mv cockatee builder/
         mv cockatoo builder/
         ls -lh builder
 
