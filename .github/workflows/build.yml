@@ -7,7 +7,7 @@ on:
 
 jobs:
   builder:
-    runs-on: macOS-latest
+    runs-on: macOS-13
     steps:
 
     - name: Checkout
