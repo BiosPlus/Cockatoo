@@ -19,12 +19,6 @@ jobs:
         p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
         p12-password: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
 
-    - name: Import Codesign Certificates - Application
-      uses: apple-actions/import-codesign-certs@v3
-      with: 
-        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_B64 }}
-        p12-password: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_DECRYPT }}
-
     - name: Make builder and output dir
       run: |
         mkdir builder
