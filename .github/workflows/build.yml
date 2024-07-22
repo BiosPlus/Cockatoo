@@ -28,9 +28,9 @@ jobs:
         p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_B64 }}
         p12-password: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_DECRYPT }}
 
-    - name: Prepare Keychain fun
-      run: |
-        xcrun notarytool store-credentials "Cockatoo" --apple-id "${{ secrets.APPLE_SIGNING_EMAIL }}" --team-id "MZ63L33DVN" --password "${{ secrets.APPLE_SIGNING_PASSWORD }}"
+    # - name: Prepare Keychain fun
+    #   run: |
+    #     xcrun notarytool store-credentials "Cockatoo" --apple-id "${{ secrets.APPLE_SIGNING_EMAIL }}" --team-id "MZ63L33DVN" --password "${{ secrets.APPLE_SIGNING_PASSWORD }}"
 
     - name: Make builder and output dir
       run: |
@@ -57,22 +57,22 @@ jobs:
 
     - name: Verify codesign
       run: |
-        codesign -dvvv builder/cockatoo
+        codesign --verify --verbose builder/cockatoo
+        spctl --assess --type exec --verbose builder/cockatoo
 
     - name: Package binary
       run: |
-        mkdir -p builder/pkg/usr/local/bin/
-        mv builder/cockatoo builder/pkg/usr/local/bin/
-        pkgbuild --root builder/pkg --identifier gg.jonblack.cockatoo --version 0.1 --install-location /usr/local/bin builder/cockatoo.pkg
+        pkgbuild --root builder/cockatoo --identifier gg.jonblack.cockatoo --version 0.1 --sign "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)" --install-location /usr/local/bin builder/cockatoo.pkg
 
     - name: Notarize the PKG
+      id: notarize
       run: |
-        xcrun notarytool submit "builder/cockatoo.pkg" --keychain-profile "Cockatoo" --wait
+        xcrun notarytool submit builder/cockatoo.pkg --apple-id "${{ secrets.APPLE_SIGNING_EMAIL }}" --password "${{ secrets.APPLE_SIGNING_PASSWORD }}" --team-id "MZ63L33DVN" --wait
 
     - name: Staple Notarization
       run: |
-        xcrun stapler staple "builder/cockatoo.pkg"
+        xcrun stapler staple builder/cockatoo.pkg
 
     - name: Move to output dir
       run: |
-        mv "builder/cockatoo.pkg" "output/cockatoo.pkg"
+        mv builder/cockatoo.pkg output/cockatoo.pkg
