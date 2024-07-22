@@ -45,7 +45,8 @@ jobs:
   
     - name: Build binary
       run: |
-        shc -r -f cockatoo.sh -o pkg/payload/usr/local/bin/cockatoo
+        shc -r -f cockatoo.sh -o cockatoo 
+        mv cockatoo pkg/payload/usr/local/bin/
 
     - name: Codesign Binary
       run: |
