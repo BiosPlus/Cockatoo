@@ -1,4 +1,4 @@
-name: Builder
+name: Build Cockatoo on Push
 
 on:
   push:
@@ -63,18 +63,9 @@ jobs:
       run: |
         munkipkg pkg
         ls -lhR
-#        pkgbuild --root builder/ --identifier gg.jonblack.cockatoo --version 0.1 --sign "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)" --install-location /usr/local/bin packaging/cockatoo.pkg
 
-    # - name: Staple Notarization
-    #   run: |
-    #     xcrun stapler staple packaging/cockatoo.pkg
-
-    # - name: Move to output dir
-    #   run: |
-    #     mv packaging/cockatoo.pkg output/cockatoo.pkg
-
-    # - name: Release Package
-    #   uses: actions/upload-artifact@v4.3.4
-    #   with:
-    #     name: Cockatoo Package
-    #     path: output/cockatoo.pkg
+    - name: Release Package
+      uses: actions/upload-artifact@v4.3.4
+      with:
+        name: Cockatoo Package
+        path: pkg/build/*.pkg
