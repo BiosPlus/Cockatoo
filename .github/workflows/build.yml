@@ -51,19 +51,20 @@ jobs:
         shc -f cockatoo.sh -o builder/cockatoo
         ls -lh builder
 
-    - name: Codesign Binary
-      run: |
-        codesign -s "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" -f --timestamp -o runtime -i "gg.jonblack.cockatoo" builder/cockatoo
-
-    - name: Verify codesign
-      run: |
-        codesign -dvvv builder/cockatoo
-
     - name: Package binary
       run: |
         mkdir -p builder/pkg/usr/local/bin/
         mv builder/cockatoo builder/pkg/usr/local/bin/
         pkgbuild --root builder/pkg --identifier gg.jonblack.cockatoo --version 0.1 --install-location /usr/local/bin builder/cockatoo.pkg
+
+    - name: Codesign Binary
+      run: |
+        codesign -s "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" -f --timestamp --deep -o runtime -i "gg.jonblack.cockatoo" builder/cockatoo.pkg
+  
+    - name: Verify codesign
+      run: |
+        codesign -dvvv builder/cockatoo.pkg
+  
 
     - name: Notarization
       run: |
