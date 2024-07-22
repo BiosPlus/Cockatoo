@@ -57,7 +57,7 @@ jobs:
 
     - name: Verify codesign
       run: |
-        codesign -dvvv cockatoo
+        codesign -dvvv builder/cockatoo
 
     - name: Zip binary
       run: |
