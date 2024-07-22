@@ -53,7 +53,8 @@ jobs:
 
     - name: Codesign Binary
       run: |
-        codesign -s "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" -f --timestamp -o runtime -i "gg.jonblack.cockatoo" cockatoo 
+        codesign -s "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" -f --timestamp -o runtime -i "gg.jonblack.cockatoo" builder/cockatoo
+
     - name: Verify codesign
       run: |
         codesign -dvvv cockatoo
