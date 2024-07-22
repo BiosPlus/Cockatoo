@@ -40,10 +40,6 @@ jobs:
     - name: Install dependencies 
       run: |
         brew install shc autoconf automake libtool
-    
-    # - name: Install Quill
-    #   run: |
-    #     curl -sSfL https://raw.githubusercontent.com/anchore/quill/main/install.sh | sh -s -- -b /usr/local/bin
   
     - name: Build binary
       run: |
@@ -58,7 +54,6 @@ jobs:
     - name: Verify codesign
       run: |
         codesign --verify --verbose builder/cockatoo
-#        spctl --assess --type exec --verbose builder/cockatoo
 
     - name: Package binary
       run: |
@@ -76,3 +71,9 @@ jobs:
     - name: Move to output dir
       run: |
         mv builder/cockatoo.pkg output/cockatoo.pkg
+
+    - name: Release Package
+      uses: actions/upload-artifact@v4.3.4
+      with:
+        name: Cockatoo Package
+        path: output/cockatoo.pkg
