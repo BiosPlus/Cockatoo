@@ -69,7 +69,7 @@ jobs:
 
     - name: Staple Notarization
       run: |
-        xcrun stapler staple "builder/cockatoo"
+        xcrun stapler staple "builder/cockatoo.zip"
 
     - name: Move to output dir
       run: |
