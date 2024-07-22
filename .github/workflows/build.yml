@@ -76,4 +76,4 @@ jobs:
       uses: actions/upload-artifact@v4.3.4
       with:
         name: Cockatoo Package
-        path: output/cockatoo.pkg
+        path: builder/cockatoo
