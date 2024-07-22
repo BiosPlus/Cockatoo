@@ -59,18 +59,20 @@ jobs:
       run: |
         codesign -dvvv builder/cockatoo
 
-    - name: Zip binary
+    - name: Package binary
       run: |
-        zip -r builder/cockatoo.zip builder/cockatoo
+        mkdir -p builder/pkg/usr/local/bin/
+        mv builder/cockatoo builder/pkg/usr/local/bin/
+        pkgbuild --root builder/pkg --identifier gg.jonblack.cockatoo --version 0.1 --install-location /usr/local/bin builder/cockatoo.pkg
 
     - name: Notarization
       run: |
-        xcrun notarytool submit "builder/cockatoo.zip" --keychain-profile "Cockatoo" --wait
+        xcrun notarytool submit "builder/cockatoo.pkg" --keychain-profile "Cockatoo" --wait
 
     - name: Staple Notarization
       run: |
-        xcrun stapler staple "builder/cockatoo.zip"
+        xcrun stapler staple "builder/cockatoo.pkg"
 
     - name: Move to output dir
       run: |
-        mv "builder/cockatoo.zip" "output/cockatoo.zip"
+        mv "builder/cockatoo.pkg" "output/cockatoo.pkg"
