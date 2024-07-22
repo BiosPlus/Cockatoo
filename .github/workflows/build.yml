@@ -44,7 +44,8 @@ jobs:
     - name: Build binary
       run: |
         ls -lh
-        shc -f cockatoo.sh -o builder/cockatoo
+        shc -f cockatoo.sh -o cockatoo
+        mv cockatoo builder/cockatoo
         ls -lh builder
 
     - name: Codesign Binary
