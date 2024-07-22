@@ -13,17 +13,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # - name: Import Codesign Certificates - Application
-    #   uses: apple-actions/import-codesign-certs@v3
-    #   with: 
-    #     p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
-    #     p12-password: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
+    - name: Import Apple Application Certificate
+      uses: apple-actions/import-codesign-certs@v3
+      with: 
+        keychain-password: ${{ github.run_id }}
+        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
+        p12-password: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
 
+    - name: Import Apple Installer Certificate
+      uses: apple-actions/import-codesign-certs@v3
+      with:
+        create-keychain: false
+        keychain-password: ${{ github.run_id }}
+        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_B64 }}
+        p12-password: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_DECRYPT }}
 
-    - name: Set Quill Signing Certs
+    - name: Prepare Keychain fun
       run: |
-        export QUILL_SIGN_P12=${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
-        export QUILL_SIGN_PASSWORD=${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
+        xcrun notarytool store-credentials "Cockatoo" --apple-id "${{ secrets.APPLE_SIGNING_EMAIL }}" --team-id "MZ63L33DVN" --password "${{ secrets.APPLE_SIGNING_PASSWORD }}"
 
     - name: Make builder and output dir
       run: |
@@ -34,20 +41,30 @@ jobs:
       run: |
         brew install shc autoconf automake libtool
     
-    - name: Install Quill
-      run: |
-        curl -sSfL https://raw.githubusercontent.com/anchore/quill/main/install.sh | sh -s -- -b /usr/local/bin
+    # - name: Install Quill
+    #   run: |
+    #     curl -sSfL https://raw.githubusercontent.com/anchore/quill/main/install.sh | sh -s -- -b /usr/local/bin
   
-    - name: Build
+    - name: Build binary
       run: |
         ls -lh
         shc -f cockatoo.sh -o builder/cockatoo
         ls -lh builder
 
-    - name: Codesign package
+    - name: Codesign Binary
       run: |
-        quill sign builder/cockatoo
-
+        codesign -s "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" -f --timestamp -o runtime -i "gg.jonblack.cockatoo" cockatoo 
     - name: Verify codesign
       run: |
-        codesign -dvvv builder/cockatoo
+        codesign -dvvv cockatoo
+
+    - name: Zip binary
+      run: |
+        zip -r builder/cockatoo.zip builder/cockatoo
+
+    - name: Notarization
+      run: |
+        xcrun notarytool submit "builder/cockatoo.zip" --keychain-profile "Cockatoo" --wait
+        xcrun stapler staple "builder/cockatoo"
+
+        mv "builder/cockatoo.zip" "output/cockatoo.zip"
