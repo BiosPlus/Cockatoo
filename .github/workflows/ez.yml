@@ -45,6 +45,8 @@ jobs:
   
     - name: Build binary
       run: |
+        pwd
+        ls -lhR
         shc -r -f cockatoo.sh -o cockatoo 
         mv cockatoo pkg/payload/usr/local/bin/
 
