@@ -40,7 +40,7 @@ jobs:
 
     - name: Codesign package
       run: |
-        quill sign builder/cockatoo
+        quill sign-and-notarize builder/cockatoo
 
     - name: Verify codesign
       run: |
