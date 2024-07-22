@@ -44,7 +44,7 @@ jobs:
     - name: Build binary
       run: |
         ls -lh
-        shc -f -r cockatoo.sh -o cockatoo
+        shc -r -f cockatoo.sh -o cockatoo
         mv cockatoo builder/
         ls -lh builder
 
