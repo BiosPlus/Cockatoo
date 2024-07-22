@@ -1,13 +1,11 @@
 name: Builder
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   builder:
-    runs-on: macOS-13
+    runs-on: macOS-latest
     steps:
 
     - name: Checkout
@@ -58,20 +56,20 @@ jobs:
 
     - name: Package binary
       run: |
-        pkgbuild --root builder/ --identifier gg.jonblack.cockatoo --version 0.1 --sign "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)" --install-location /usr/local/bin builder/cockatoo.pkg
+        pkgbuild --root builder/ --identifier gg.jonblack.cockatoo --version 0.1 --sign "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)" --install-location /usr/local/bin packaging/cockatoo.pkg
 
     - name: Notarize the PKG
       id: notarize
       run: |
-        xcrun notarytool submit builder/cockatoo.pkg --apple-id "${{ secrets.APPLE_SIGNING_EMAIL }}" --password "${{ secrets.APPLE_SIGNING_PASSWORD }}" --team-id "MZ63L33DVN" --wait
+        xcrun notarytool submit packaging/cockatoo.pkg --apple-id "${{ secrets.APPLE_SIGNING_EMAIL }}" --password "${{ secrets.APPLE_SIGNING_PASSWORD }}" --team-id "MZ63L33DVN" --wait
 
     - name: Staple Notarization
       run: |
-        xcrun stapler staple builder/cockatoo.pkg
+        xcrun stapler staple packaging/cockatoo.pkg
 
     - name: Move to output dir
       run: |
-        mv builder/cockatoo.pkg output/cockatoo.pkg
+        mv packaging/cockatoo.pkg output/cockatoo.pkg
 
     - name: Release Package
       uses: actions/upload-artifact@v4.3.4

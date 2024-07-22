@@ -10,5 +10,8 @@
     "signing_info": {
         "identity": "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)",
         "timestamp": true
+    },
+    "notarization_info": {
+        "keychain_profile": "cockatoo"
     }
 }

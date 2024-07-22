@@ -1,0 +1,76 @@
+name: Builder
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  builder:
+    runs-on: macOS-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Import Apple Application Certificate
+      uses: apple-actions/import-codesign-certs@v3
+      with: 
+        keychain-password: ${{ github.run_id }}
+        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_B64 }}
+        p12-password: ${{ secrets.APPLE_DEVELOPERIDAPPLICATION_DECRYPT }}
+
+    - name: Import Apple Installer Certificate
+      uses: apple-actions/import-codesign-certs@v3
+      with:
+        create-keychain: false
+        keychain-password: ${{ github.run_id }}
+        p12-file-base64: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_B64 }}
+        p12-password: ${{ secrets.APPLE_DEVELOPERIDINSTALLER_DECRYPT }}
+
+    - name: Prepare Keychain fun
+      run: |
+        xcrun notarytool store-credentials "cockatoo" --apple-id "${{ secrets.APPLE_SIGNING_EMAIL }}" --team-id "MZ63L33DVN" --password "${{ secrets.APPLE_SIGNING_PASSWORD }}"
+
+    - name: Make builder and output dir
+      run: |
+        mkdir builder
+        mkdir output
+    
+    - name: Install dependencies 
+      run: |
+        brew reinstall shc autoconf automake libtool
+        curl https://raw.githubusercontent.com/munki/munki-pkg/main/munkipkg -o /usr/local/bin/munkipkg
+        chmod +x /usr/local/bin/munkipkg
+  
+    - name: Build binary
+      run: |
+        shc -r -f cockatoo.sh -o pkg/payload/usr/local/bin/cockatoo
+
+    - name: Codesign Binary
+      run: |
+        codesign --deep --force --verify --verbose --sign "Developer ID Application: Michael Jon Ovcaric (MZ63L33DVN)" --timestamp -o runtime -i "gg.jonblack.cockatoo" pkg/payload/usr/local/bin/cockatoo
+
+    - name: Verify codesign
+      run: |
+        codesign --verify --verbose pkg/payload/usr/local/bin/cockatoo
+
+    - name: Package binary
+      run: |
+        munkipkg pkg
+        ls -lhR
+#        pkgbuild --root builder/ --identifier gg.jonblack.cockatoo --version 0.1 --sign "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)" --install-location /usr/local/bin packaging/cockatoo.pkg
+
+    # - name: Staple Notarization
+    #   run: |
+    #     xcrun stapler staple packaging/cockatoo.pkg
+
+    # - name: Move to output dir
+    #   run: |
+    #     mv packaging/cockatoo.pkg output/cockatoo.pkg
+
+    # - name: Release Package
+    #   uses: actions/upload-artifact@v4.3.4
+    #   with:
+    #     name: Cockatoo Package
+    #     path: output/cockatoo.pkg
