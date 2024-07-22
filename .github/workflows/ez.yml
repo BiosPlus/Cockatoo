@@ -48,6 +48,7 @@ jobs:
         pwd
         ls -lhR
         shc -r -f cockatoo.sh -o cockatoo 
+        mkdir -p pkg/payload/usr/local/bin
         mv cockatoo pkg/payload/usr/local/bin/
 
     - name: Codesign Binary
