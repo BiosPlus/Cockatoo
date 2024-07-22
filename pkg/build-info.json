@@ -1,0 +1,14 @@
+{
+    "postinstall_action": "none",
+    "suppress_bundle_relocation": true,
+    "name": "Cockatoo-${version}.pkg",
+    "distribution_style": true,
+    "install_location": "/usr/local/bin/",
+    "version": "0.1",
+    "ownership": "recommended",
+    "identifier": "gg.jonblack.Cockatoo",
+    "signing_info": {
+        "identity": "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)",
+        "timestamp": true
+    }
+}
