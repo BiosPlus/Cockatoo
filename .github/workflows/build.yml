@@ -39,7 +39,7 @@ jobs:
     
     - name: Install dependencies 
       run: |
-        brew install shc autoconf automake libtool
+        brew reinstall shc autoconf automake libtool --force
   
     - name: Build binary
       run: |
