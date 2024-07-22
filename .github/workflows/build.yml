@@ -62,7 +62,7 @@ jobs:
 
     - name: Package binary
       run: |
-        pkgbuild --root builder/cockatoo --identifier gg.jonblack.cockatoo --version 0.1 --sign "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)" --install-location /usr/local/bin builder/cockatoo.pkg
+        pkgbuild --root builder/ --identifier gg.jonblack.cockatoo --version 0.1 --sign "Developer ID Installer: Michael Jon Ovcaric (MZ63L33DVN)" --install-location /usr/local/bin builder/cockatoo.pkg
 
     - name: Notarize the PKG
       id: notarize
